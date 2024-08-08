@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import backgroundImage from '../assets/pexels-fauxels-3183150.jpg'; 
 
 const teamMembers = [
-  { name: 'Sagar Trushna Panigrahi', role: 'Developer' },
-  { name: 'Amit Kumar Mahapatra', role: 'Project Associate' },
-  { name: 'Kalpajit Jena', role: 'Backend Developer' },
-  { name: 'Amit Kumar Jena', role: 'Quality Assurance (QA) Engineer' },
+  { name: 'Sagar Trushna Panigrahi', role: 'Developer', email: 'sagar.trushnapanigrahi2002@gmail.com', linkedin: 'https://www.linkedin.com/in/sagar-trushna-panigrahi-079b6727a/' },
+  { name: 'Amit Kumar Mahapatra', role: 'Project Associate', email: 'amitkumarmahapatra2@gmail.com', linkedin: 'https://www.linkedin.com/in/amit-kumar-mahapatra-7b4989274?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
+  { name: 'Kalpajit Jena', role: 'Backend Developer', email: 'kalpajitjena00@gmail.com', linkedin: 'https://linkedin.com/in/kalpajit' },
+  { name: 'Amit Kumar Jena', role: 'Quality Assurance (QA) Engineer', email: 'amitjena175@gmail.com', linkedin: 'https://linkedin.com/in/amitk' },
 ];
 
 const containerVariants = {
@@ -20,6 +20,12 @@ const cardVariants = {
 };
 
 const Team = () => {
+  const [selectedMember, setSelectedMember] = useState(null);
+
+  const handleCardClick = (index) => {
+    setSelectedMember(selectedMember === index ? null : index);
+  };
+
   return (
     <TeamContainer
       initial="hidden"
@@ -32,11 +38,21 @@ const Team = () => {
         {teamMembers.map((member, index) => (
           <TeamCard
             key={index}
+            onClick={() => handleCardClick(index)}
             whileHover="hover"
             variants={cardVariants}
+            selected={selectedMember === index}
           >
             <h3>{member.name}</h3>
             <p>{member.role}</p>
+            {selectedMember === index && (
+              <Details>
+                <p>Email: {member.email}</p>
+                <p>
+                  LinkedIn: <a href={member.linkedin} target="_blank" rel="noopener noreferrer">{member.linkedin}</a>
+                </p>
+              </Details>
+            )}
           </TeamCard>
         ))}
       </TeamList>
@@ -77,12 +93,30 @@ const TeamContainer = styled(motion.div)`
       font-size: 1rem;
     }
   }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
 `;
 
 const TeamList = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const TeamCard = styled(motion.div)`
@@ -95,6 +129,8 @@ const TeamCard = styled(motion.div)`
   text-align: center;
   width: 250px;
   transition: transform 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
 
   h3 {
     font-size: 1.5rem;
@@ -103,6 +139,7 @@ const TeamCard = styled(motion.div)`
 
   p {
     font-size: 1.1rem;
+    word-wrap: break-word;
   }
 
   &:hover {
@@ -112,6 +149,42 @@ const TeamCard = styled(motion.div)`
   @media (max-width: 768px) {
     width: 80%;
     margin: 1rem 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+    h3 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+`;
+
+const Details = styled.div`
+  margin-top: 1rem;
+
+  p {
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    word-wrap: break-word;
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+
+      &:hover {
+        color: #ddd;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    p {
+      font-size: 0.8rem;
+    }
   }
 `;
 

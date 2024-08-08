@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import emailjs from 'emailjs-com';
-import backgroundImage from '../assets/istockphoto-1474312347-170667a.webp'; 
+import backgroundImage from '../assets/pngtree-contact-us-for-banner-material-image_922362.jpg'; 
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -99,7 +99,7 @@ const ContactContainer = styled(motion.div)`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: #fff;
+  color: black;
   text-align: center;
   padding: 2rem;
 
