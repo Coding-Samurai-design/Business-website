@@ -47,10 +47,26 @@ const Team = () => {
             <p>{member.role}</p>
             {selectedMember === index && (
               <Details>
-                <p>Email: {member.email}</p>
-                <p>
-                  LinkedIn: <a href={member.linkedin} target="_blank" rel="noopener noreferrer">{member.linkedin}</a>
-                </p>
+                <StyledButton
+                  as="a"
+                  href={`mailto:${member.email}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Email
+                </StyledButton>
+                <StyledButton
+                  as="a"
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  LinkedIn
+                </StyledButton>
               </Details>
             )}
           </TeamCard>
@@ -166,25 +182,38 @@ const TeamCard = styled(motion.div)`
 const Details = styled.div`
   margin-top: 1rem;
 
-  p {
-    font-size: 0.9rem;
-    margin: 0.5rem 0;
-    word-wrap: break-word;
-
-    a {
-      color: #fff;
-      text-decoration: underline;
-
-      &:hover {
-        color: #ddd;
-      }
-    }
-  }
-
   @media (max-width: 480px) {
     p {
       font-size: 0.8rem;
     }
+  }
+`;
+
+const StyledButton = styled(motion.a)`
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1.5rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, #feb47b, #ff7e5f);
+    box-shadow: 0px 4px 15px rgba(255, 126, 95, 0.6);
+  }
+
+  &:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
   }
 `;
 
